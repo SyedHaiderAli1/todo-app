@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:get/get.dart';
+import 'package:todoapp/app/config/app_colors.dart';
 import 'package:todoapp/app/routes/app_pages.dart';
 import 'package:todoapp/models/todo.dart';
 import 'package:sizer/sizer.dart';

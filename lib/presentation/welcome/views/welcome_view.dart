@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:todoapp/app/config/app_colors.dart';
 import 'package:todoapp/app/routes/app_pages.dart';
 import 'package:todoapp/app/shared_widgets/custom_button.dart';
 import 'package:todoapp/app/shared_widgets/my_text.dart';
 import 'package:todoapp/app/utils/utils.dart';
-import 'package:todoapp/widgets/button.dart';
 import '../controllers/welcome_controller.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,7 +17,7 @@ class WelcomeView extends GetView<WelcomeController> {
       appBar: AppBar(),
       bottomNavigationBar:CustomButton(
         onPress: () {
-          Get.toNamed(Routes.ADD_TODO);
+          Get.toNamed(Routes.TODO);
 
           // Get.to(() => TodosScreen());
         },

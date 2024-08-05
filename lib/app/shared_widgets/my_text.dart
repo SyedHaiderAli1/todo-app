@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todoapp/app/config/app_colors.dart';
 
 
 class MyText extends StatelessWidget {
@@ -47,6 +48,7 @@ class MyText extends StatelessWidget {
       maxLines: line,
       overflow: overFLow,
 
+
       style: TextStyle(
         fontWeight: weight,
         fontSize: size,
@@ -54,8 +56,8 @@ class MyText extends StatelessWidget {
         letterSpacing: letterSpacing,
         color: clr,
         shadows: shadows,
-
-
+        decorationColor: AppColors.primary,
+        decoration: lineThrough == true ? TextDecoration.lineThrough : TextDecoration.none,
       ),
       textAlign: textAlign,
     );

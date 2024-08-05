@@ -1,19 +1,22 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:todoapp/models/todo.dart';
 
-class TodoController extends GetxController {
+class TodoController extends GetxController with GetSingleTickerProviderStateMixin{
   //TODO: Implement TodoController
-  var todos = [].obs;
-  var done = [].obs;
-  var remaining = [].obs;
+  RxList<Todo> todos = <Todo>[].obs;
+  RxList<Todo> done = <Todo>[].obs;
+  RxList<Todo> remaining = <Todo>[].obs;
   final count = 0.obs;
+  late TabController tabController;
+
   @override
   void onInit() {
+    tabController = TabController(length: 2, vsync: this);
     getTodos();
-
     super.onInit();
   }
 
@@ -21,8 +24,8 @@ class TodoController extends GetxController {
   toggleTodo(Todo todo) async {
     var index = todos.indexOf(todo);
     var editTodo = todos[index];
-    log("i am here");
     editTodo.isDone = !editTodo.isDone;
+    editTodo.cdt = DateTime.now();
     if (editTodo.isDone) {
       done.add(editTodo);
       remaining.remove(editTodo);
@@ -37,9 +40,12 @@ class TodoController extends GetxController {
   }
 
 
-  Future getTodos() async {
+  Future<void> getTodos() async {
+    todos.clear();
+    done.clear();
+    remaining.clear();
+
     Box box;
-    print("Getting todos");
     try {
       box = Hive.box('db');
     } catch (error) {
@@ -47,8 +53,7 @@ class TodoController extends GetxController {
       print(error);
     }
     var tds = box.get('todos');
-    print("TODOS $tds");
-    if (tds != null) todos.value = tds;
+    if (tds != null) todos.value = List<Todo>.from(tds);
     for (Todo todo in todos) {
       if (todo.isDone) {
         done.add(todo);
@@ -57,6 +62,19 @@ class TodoController extends GetxController {
       }
     }
     update();
+  }
+
+
+  Future<void> deleteTodo(Todo todo) async {
+    todos.remove(todo);
+    var box = await Hive.openBox('db');
+    await box.put('todos', todos.toList());
+    if (todo.isDone) {
+      done.remove(todo);
+    } else {
+      remaining.remove(todo);
+    }
+    update(); // This will notify the listeners to rebuild the UI
   }
 
 

@@ -26,6 +26,8 @@ dev_dependencies:
   flutter_native_splash: ^1.2.1
   google_fonts:
   sizer: ^2.0.15
+  intl: ^0.18.0
+  custom_sliding_segmented_control: ^1.8.3
   flutter_test: 
     sdk: flutter
 

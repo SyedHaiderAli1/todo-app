@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
+import 'package:intl/intl.dart';
 import '../config/app_colors.dart';
 
 
@@ -64,8 +64,11 @@ class Utils {
   }
 
 
+  static formatDate(DateTime now){
+   return DateFormat('yyyy-MM-dd hh:mm a').format(now);
+  }
+
   static Future<File?> refineImage(File pickedFile) async {
-    // final tempDir = await getTemporaryDirectory();
 
     File toCompress = pickedFile;
 

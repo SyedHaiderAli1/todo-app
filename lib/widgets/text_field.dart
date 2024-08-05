@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todoapp/app/config/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -7,8 +9,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.height,
     this.borderRadius,
-    this.nextFocus,
-    this.focus,
+    required this.focus,
     this.maxLines,
     this.padding,
   }) : super(key: key);
@@ -17,8 +18,7 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final double? height;
   final BorderRadius? borderRadius;
-  final FocusNode? nextFocus;
-  final FocusNode? focus;
+  final FocusNode focus;
   final int? maxLines;
   final EdgeInsets? padding;
 
@@ -36,13 +36,14 @@ class CustomTextFormField extends StatelessWidget {
         autofocus: true,
         focusNode: focus,
         maxLines: maxLines,
+        cursorColor: AppColors.primary,
         decoration: InputDecoration(
           hintText: hintText,
           border: InputBorder.none,
         ),
         controller: controller,
-        onEditingComplete: () {
-          nextFocus?.requestFocus();
+        onTapOutside: (event) {
+          focus.unfocus();
         },
       ),
     );
