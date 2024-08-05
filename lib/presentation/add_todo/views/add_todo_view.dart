@@ -4,11 +4,10 @@ import 'package:get/get.dart';
 import 'package:todoapp/app/config/app_colors.dart';
 import 'package:todoapp/app/shared_widgets/custom_button.dart';
 import 'package:todoapp/app/shared_widgets/my_text.dart';
+import 'package:todoapp/app/shared_widgets/text_field.dart';
 import 'package:todoapp/app/shared_widgets/todo_appBar.dart';
 import 'package:todoapp/app/utils/utils.dart';
 import 'package:todoapp/models/todo.dart';
-import 'package:todoapp/widgets/button.dart';
-import 'package:todoapp/widgets/text_field.dart';
 import 'package:sizer/sizer.dart';
 import '../controllers/add_todo_controller.dart';
 
@@ -29,18 +28,18 @@ class AddTodoView extends GetView<AddTodoController> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(23),
-                      gradient: const LinearGradient(
+                      gradient:  LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
                         colors: [
-                          Color(0xffF9F9F9),
-                          Color(0xff4EBC94),
+                          AppColors.primary,
+                          AppColors.primary.withOpacity(0.2),
                         ],
                       ),
                     boxShadow: [
                       BoxShadow(
-                        color:Color(0xff4EBC94).withOpacity(0.34),
-                        offset: const Offset(2, 7),
+                        color: AppColors.primary.withOpacity(0.34),
+                        offset: const Offset(-2, 10),
                         blurRadius: 11,
                         spreadRadius: 0
                       )
@@ -82,7 +81,7 @@ class AddTodoView extends GetView<AddTodoController> {
                   onPress:() async {
                     if (controller.titleController.text.isEmpty || controller.descriptionController.text.isEmpty) return;
                     var todo = Todo(
-                      id:controller.todo!=null ?  controller.todo!.id ?? "" : UniqueKey().toString(),
+                      id:controller.todo!=null ?  controller.todo!.id  : UniqueKey().toString(),
                       title: controller.titleController.text,
                       description: controller.descriptionController.text,
                       cdt: DateTime.now(),

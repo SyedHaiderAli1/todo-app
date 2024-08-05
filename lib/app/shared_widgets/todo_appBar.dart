@@ -8,7 +8,8 @@ import 'package:sizer/sizer.dart';
 class TodoAppBar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final String title;
-  const TodoAppBar({super.key,this.bottom,required this.title});
+  final isBack;
+  const TodoAppBar({super.key,this.bottom,required this.title,this.isBack=true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +17,17 @@ class TodoAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.primary,
       elevation: 0,
       centerTitle: true,
-      leading: GestureDetector(
+      leading:
+      isBack?
+      GestureDetector(
           onTap: (){
             Get.back();
           },
-          child: const Icon(CupertinoIcons.back, color: AppColors.white)),
+          child: Container(
+              height: 50,
+              width: 50,
+              color: Colors.transparent,
+              child: const Icon(CupertinoIcons.back, color: AppColors.white))): const SizedBox.shrink(),
       bottom: bottom,
       title: MyText(
         title: title,

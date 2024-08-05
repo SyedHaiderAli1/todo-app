@@ -9,21 +9,5 @@ class AppColors {
   static const Color tertiaryOrange = Color(0xFFFC6404);
   static const Color boxColor = Color(0xFF4EBC94);
   static const Color grey = Color(0xFFE5E7E9);
-  static const LinearGradient primaryGradient = LinearGradient(
-    colors: [
-      Color(0xFF002E94), // Start color
-      Color(0xFF04256F), // End color
-    ],
-    begin: Alignment.centerLeft, // Gradient direction
-    end: Alignment.centerRight,
-  );
-  static const LinearGradient secondaryGradient = LinearGradient(
-    colors: [
-      secondary, // Start color
-      tertiaryOrange, // End color
-    ],
-    begin: Alignment.topCenter, // Gradient direction
-    end: Alignment.bottomCenter,
-  );
-
+  static const Color linear = Color(0xFFF9F9F9);
   }

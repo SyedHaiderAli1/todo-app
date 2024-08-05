@@ -18,13 +18,14 @@ class RemainingTab extends StatelessWidget {
     return GetBuilder<TodoController>(
       init: TodoController(),
       builder: (controller) {
-        return Container(
+        return controller.remaining.value.isNotEmpty ?
+          Container(
           color: AppColors.boxColor.withOpacity(0.03),
           child: ListView.builder(
             padding: const EdgeInsets.all(8.0),
             itemCount:controller.remaining.length,
             itemBuilder: (context, index) {
-              return controller.remaining.isNotEmpty ?
+              return
               GestureDetector(
                 onTap: (){
                   Get.toNamed(Routes.ADD_TODO,arguments: controller.remaining[index]);
@@ -57,13 +58,13 @@ class RemainingTab extends StatelessWidget {
                             ).paddingOnly(right: 12),
                           ),
                           SizedBox(
-                            width: 12.w,
+                            width: 30.w,
                             child: MyText(
                               title: controller.remaining[index].title,
                               clr: Colors.black,
                               overFLow: TextOverflow.ellipsis,
                               weight: FontWeight.w400,
-                              size: 14.sp,
+                              size: 10.sp,
                             ),
                           ),
                         ],
@@ -90,21 +91,25 @@ class RemainingTab extends StatelessWidget {
                     ],
                   ),
                 ).paddingOnly(top: 12),
-              )
-              : Column(
-                children: [
-                  Image.asset(Utils.getImagePath('no_task'),height: 18,width: 16),
-                  MyText(
-                    title: 'Your task is empty, you have no list Todo',
-                    clr: Colors.black,
-                    size: 7.5.sp,
-                    weight: FontWeight.w400,
-                  )
-                ],
               );
+
             },
           ),
-        ).paddingSymmetric(horizontal: 27,vertical: 20);
+        ).paddingSymmetric(horizontal: 27,vertical: 20):
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(Utils.getImagePath('no_task'),scale: 4).paddingOnly(bottom: 4.h),
+              MyText(
+                title: 'Your task is empty, you have no list Todo',
+                clr: Colors.black,
+                size: 14.sp,
+                textAlign: TextAlign.center,
+                weight: FontWeight.w400,
+              ).paddingSymmetric(horizontal: 50)
+            ],
+          );
       }
     );
   }

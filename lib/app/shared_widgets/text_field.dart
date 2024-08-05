@@ -4,7 +4,7 @@ import 'package:todoapp/app/config/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
     this.height,
@@ -12,7 +12,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.focus,
     this.maxLines,
     this.padding,
-  }) : super(key: key);
+  });
 
   final TextEditingController controller;
   final String hintText;

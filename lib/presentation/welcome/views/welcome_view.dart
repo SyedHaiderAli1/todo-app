@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todoapp/app/config/app_colors.dart';
+import 'package:todoapp/app/hive_service.dart';
 import 'package:todoapp/app/routes/app_pages.dart';
 import 'package:todoapp/app/shared_widgets/custom_button.dart';
 import 'package:todoapp/app/shared_widgets/my_text.dart';
@@ -17,15 +18,11 @@ class WelcomeView extends GetView<WelcomeController> {
       appBar: AppBar(),
       bottomNavigationBar:CustomButton(
         onPress: () {
+          HiveService.saveBoolValue(true);
           Get.toNamed(Routes.TODO);
-
-          // Get.to(() => TodosScreen());
-        },
+          },
         text: 'Get Started',
-      ).paddingSymmetric(
-        horizontal: 48,
-        vertical: 24
-      ),
+      ).paddingSymmetric(horizontal: 48, vertical: 24),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

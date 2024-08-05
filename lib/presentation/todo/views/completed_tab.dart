@@ -1,11 +1,7 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:todoapp/app/config/app_colors.dart';
-import 'package:todoapp/app/routes/app_pages.dart';
 import 'package:todoapp/app/shared_widgets/custom_dialog.dart';
 import 'package:todoapp/app/shared_widgets/my_text.dart';
 import 'package:todoapp/app/utils/utils.dart';
@@ -20,14 +16,14 @@ class CompletedTab extends StatelessWidget {
     return GetBuilder<TodoController>(
       init: TodoController(),
       builder: (controller) {
-        return Container(
+        return  controller.done.isNotEmpty ?
+         Container(
           color: AppColors.boxColor.withOpacity(0.03),
           child: ListView.builder(
             padding: const EdgeInsets.all(8.0),
             itemCount: controller.done.length,
             itemBuilder: (context, index) {
-              return controller.done.isNotEmpty ?
-              Container(
+              return Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 20),
                 decoration: BoxDecoration(
                     color: AppColors.white,
@@ -40,7 +36,7 @@ class CompletedTab extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: (){
-                            controller.toggleTodo(controller.remaining[index]);
+                            controller.toggleTodo(controller.done[index]);
                           },
                           child: Container(
                             width: 18,
@@ -57,12 +53,16 @@ class CompletedTab extends StatelessWidget {
                             child: const Icon(Icons.done,color: AppColors.white,size: 12,weight: 12),
                           ).paddingOnly(right: 12),
                         ),
-                        MyText(
-                          title: controller.done[index].title,
-                          lineThrough: true,
-                          clr: AppColors.primary,
-                          weight: FontWeight.w400,
-                          size: 14.sp,
+                        SizedBox(
+                          width: 30.w,
+                          child: MyText(
+                            title: controller.done[index].title,
+                            lineThrough: true,
+                            overFLow: TextOverflow.ellipsis,
+                            clr: AppColors.primary,
+                            weight: FontWeight.w400,
+                            size: 14.sp,
+                          ),
                         ),
                       ],
                     ),
@@ -88,21 +88,24 @@ class CompletedTab extends StatelessWidget {
                     ),
                   ],
                 ),
-              ).paddingOnly(top: 12)
-                  : Column(
-                children: [
-                  Image.asset(Utils.getImagePath('no_task'),height: 18,width: 16),
-                  MyText(
-                    title: 'Your task is empty, you have no list Todo',
-                    clr: Colors.black,
-                    size: 7.5.sp,
-                    weight: FontWeight.w400,
-                  )
-                ],
-              );
+              ).paddingOnly(top: 12);
             },
           ),
-        ).paddingSymmetric(horizontal: 27,vertical: 20);
+        ).paddingSymmetric(horizontal: 27,vertical: 20):
+         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(Utils.getImagePath('no_task'),scale: 4).paddingOnly(bottom: 4.h),
+            MyText(
+              title: 'Your task is empty, you have no list completed',
+              clr: Colors.black,
+              size: 14.sp,
+              textAlign: TextAlign.center,
+              weight: FontWeight.w400,
+            ).paddingSymmetric(horizontal: 50)
+          ],
+        );
       }
     );
   }

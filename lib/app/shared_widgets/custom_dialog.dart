@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:todoapp/app/config/app_colors.dart';
 import 'package:todoapp/app/shared_widgets/my_text.dart';
@@ -14,7 +12,7 @@ class CustomDialogBox {
     Get.dialog(
       Dialog(
         child: Container(
-          height: 224,
+          height: 180,
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
@@ -24,8 +22,15 @@ class CustomDialogBox {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(Utils.getImagePath('delete',), height: 24, width: 24, color: Colors.red),
-              MyText(title: title, size: 11.sp, weight: FontWeight.w500),
+              MyText(
+                title: "Delete Task",
+                clr: AppColors.black,
+                size: 10.sp,
+                weight: FontWeight.w600,
+              ),
+              MyText(title: title,
+                  clr: AppColors.black.withOpacity(0.7),
+                  size: 11.sp, weight: FontWeight.w300),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -36,6 +41,7 @@ class CustomDialogBox {
                 width: 25.w,
                 height: 40,
                 decoration: BoxDecoration(
+
                   boxShadow: [
                     BoxShadow(
                       color: AppColors.white.withOpacity(0.9),
@@ -44,10 +50,9 @@ class CustomDialogBox {
                       blurRadius: 10,
                     ),
                   ],
-                            color: AppColors.secondary,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Center(
+                  color: AppColors.primary,
+                  borderRadius: BorderRadius.circular(7)),
+                  child: Center(
                     child: MyText(
                         title: "Yes",
                         clr: AppColors.white,
@@ -65,7 +70,9 @@ class CustomDialogBox {
                         width: 25.w,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: AppColors.primary,
+                          border: Border.all(
+                            color: AppColors.black
+                          ),
                           borderRadius: BorderRadius.circular(7),
                           boxShadow: [
                             BoxShadow(
@@ -79,7 +86,7 @@ class CustomDialogBox {
                         child: Center(
                           child: MyText(
                               title: "No",
-                              clr: AppColors.white,
+                              clr: AppColors.black,
                               size: 8.sp,
                               weight: FontWeight.w600,
                               isUrbanist: false),
